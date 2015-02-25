@@ -23,6 +23,36 @@
 int main()
 {
 	
+	//initilization of GLFW
+	if (!glfwInit())
+	{
+		return -1;
+	}
+
+	GLFWwindow* window;
+	window = glfwCreateWindow(640, 480, "Butts bruh", NULL, NULL);
+
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+	}
+
+	//Make windows context Current
+	glfwMakeContextCurrent(window);
+
+	//------------------------------------------------------------------
+	//Start GLEW
+	if (glewInit() != GLEW_OK)
+	{
+		//OpenGL didn't Start-up! shutdown GLFW and return an error
+		fprintf(stderr, "ERROR: GLFW was not started");
+		glfwTerminate();
+		return -1;
+	}
+	//------------------------------------------------------------------
+	//Loop until user closes the window.
+
 	while (true)
 	{
 	}
