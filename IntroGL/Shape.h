@@ -22,6 +22,7 @@ public:
 
 	void syncVbo();
 
+	//float vertices;
 	float x;
 	float y;
 	float width;
