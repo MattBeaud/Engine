@@ -21,15 +21,32 @@
 const GLchar* vertexSource =
 
 "#version 330\n"
+
 "in vec2 position;"
-"void main() {"
+"in vec3 color;"
+"in vec2 texcoord;"
+
+"out vec3 Color;"
+"out vec2 Texcoord;"
+
+"uniform mat4 trans;"
+
+"void main()"
+"{"
+"	Texcoord = texcoord;"
+"	Color = color;"
 "   gl_Position = vec4(position, 0.0, 1.0);"
 "}";
+
 const GLchar* fragmentSource =
-"#version 150 core\n"
+"#version 330\n"
+"in vec3 Color;"
+"in vec2 Texcoord;"
 "out vec4 outColor;"
-"void main() {"
-"   outColor = vec4(1.0, 1.0, 1.0, 1.0);"
+"uniform sampler2D tex;"
+"void main() "
+"{"
+"   outColor = texture(tex, Texcoord) * vec4(Color, 1.0);"
 "}";
 
 
@@ -145,9 +162,46 @@ int main()
 	triangle.syncVbo();
 	glBindBuffer(GL_ARRAY_BUFFER, triangle.vbo);
 
+	
+//---------------------------------------------------------------------------------
+	//LOAD TEXTURE
+	GLuint tex;
+	glGenTextures(1, &tex);
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, tex);
+	int width, height;
+	unsigned char* image =
+		SOIL_load_image("Sonic.png", &width, &height, 0, SOIL_LOAD_RGB);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
+	glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 0);
+
+
+
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	//Retrieving Postion
 	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+	GLint texAttrib = glGetAttribLocation(shaderProgram, "texcoord");
+	GLint colAttrib = glGetAttribLocation(shaderProgram, "color");
+
+
 	glEnableVertexAttribArray(posAttrib);
+	glEnableVertexAttribArray(texAttrib);
+	glEnableVertexAttribArray(colAttrib);
+
+
 	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), 0);
+	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
+	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+
+
+
 
 
 
