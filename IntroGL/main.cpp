@@ -215,7 +215,6 @@ int main()
 
 			// Draw a triangle from the 3 vertices
 			glBindBuffer(GL_ARRAY_BUFFER, triangle.vbo);
-
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 			//glDrawArrays(GL_TRIANGLES, 0, 3);
