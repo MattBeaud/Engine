@@ -16,12 +16,14 @@ class Shape
 {
 
 public:
-	Shape(float in_x, float in_y, float in_width, float in_height, float in_U, float in_V, float in_UWidth, float in_VHeight);
+	Shape(float in_x, float in_y, float in_width, float in_height, float in_U, float in_V, float in_UWidth, float in_VHeight, GLuint in_shaderProgram);
 	Shape();
 	~Shape();
 
 	void syncVbo();
+	void syncEbo();
 	void Draw();
+	void Texturing();
 	//float vertices; // holy fucking shit
 	float x;
 	float y;
@@ -35,6 +37,8 @@ public:
 	GLuint vbo;
 	GLuint ebo;	// todo
 	GLuint vao;	// todo if time allows or justin mandates
+
+	GLuint textures[2];
 
 	GLuint shaderProgram;	// todo
 };
