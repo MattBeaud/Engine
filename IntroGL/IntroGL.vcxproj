@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Downloads\texture.jpg" />
+    <Image Include="Sonic.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shaders.h" />

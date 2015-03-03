@@ -46,6 +46,9 @@
     <Image Include="..\..\..\..\..\Downloads\texture.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Sonic.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Timer.h">

@@ -151,7 +151,7 @@ int main()
 	glUseProgram(shaderProgram);
 	
 	//layout of vertex data
-	Shape triangle = Shape(-0.5, -0.5, 1, 1, 0, 0, 0.5, 0.5);
+	Shape triangle = Shape(-0.5, -0.5, 1, 1, 0, 0, 0.082, 0.3);
 	triangle.syncVbo();
 	glBindBuffer(GL_ARRAY_BUFFER, triangle.vbo);
 
@@ -165,8 +165,8 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, tex);
 	int width, height;
 	unsigned char* image =
-		SOIL_load_image("Sonic.png", &width, &height, 0, SOIL_LOAD_RGB);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+		SOIL_load_image("Sonic.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 0);
 
@@ -192,8 +192,6 @@ int main()
 	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), 0);
 	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
 	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
-
-
 
 
 
