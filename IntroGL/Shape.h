@@ -16,7 +16,7 @@ class Shape
 {
 
 public:
-	Shape(float in_x, float in_y, float in_width, float in_height, float in_U, float in_V, float in_UWidth, float in_VHeight, GLuint in_shaderProgram);
+	Shape(float in_x, float in_y, float in_width, float in_height, float in_U, float in_V, float in_UWidth, float in_VHeight, GLuint in_shaderProgram, char* in_textureName);
 	Shape();
 	~Shape();
 
@@ -34,6 +34,8 @@ public:
 	float UWidth;
 	float VHeight;
 	
+	char* textureName;
+
 	GLuint vbo;
 	GLuint ebo;	// todo
 	GLuint vao;	// todo if time allows or justin mandates

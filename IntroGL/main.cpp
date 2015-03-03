@@ -122,16 +122,7 @@ int main()
 	//Loop until user closes the window
 
 
-	//GLuint ebo;
-	/*glGenBuffers(1, &ebo);
-
-	GLuint elements[] =
-	{
-		0, 1, 2,
-		2, 3, 0
-	};
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);*/
+	
 
 
 	//Generate Shaders
@@ -186,7 +177,7 @@ int main()
 	glUseProgram(shaderProgram);
 	
 	//layout of vertex data
-	Shape triangle = Shape(-0.5, -0.5, 1, 1, 0, 0, 0.082, 0.3, shaderProgram);
+	Shape triangle = Shape(-0.5, -0.5, 1, 1, 0, 0, 0.082, 0.3, shaderProgram, "MegamanxSheet.png");
 	triangle.syncVbo();
 	triangle.syncEbo();
 	triangle.Texturing();

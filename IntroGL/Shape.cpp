@@ -1,6 +1,6 @@
 #include "Shape.h"
 
-Shape::Shape(float in_x, float in_y, float in_width, float in_height, float in_U, float in_V, float in_UWidth, float in_VHeight, GLuint in_shaderProgram) : Shape() {
+Shape::Shape(float in_x, float in_y, float in_width, float in_height, float in_U, float in_V, float in_UWidth, float in_VHeight, GLuint in_shaderProgram, char* in_textureName) : Shape() {
 	x = in_x;
 	y = in_y;
 	width = in_width;
@@ -10,6 +10,7 @@ Shape::Shape(float in_x, float in_y, float in_width, float in_height, float in_U
 	UWidth = in_UWidth;
 	VHeight = in_VHeight;
 	shaderProgram = in_shaderProgram;
+	textureName = in_textureName;
 
 	// Specify vertex data
 	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
@@ -75,7 +76,7 @@ void Shape::Texturing()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	int width, height;
-	unsigned char* image = SOIL_load_image("MegaManXSheet.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image(textureName, &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 0);
