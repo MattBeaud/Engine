@@ -16,17 +16,22 @@ class Shape
 {
 
 public:
-	Shape(float in_x, float in_y, float in_width, float in_height);
+	Shape(float in_x, float in_y, float in_width, float in_height, float in_U, float in_V, float in_UWidth, float in_VHeight);
 	Shape();
 	~Shape();
 
 	void syncVbo();
-
+	void Draw();
 	//float vertices;
 	float x;
 	float y;
 	float width;
 	float height;
+	float U;
+	float V;
+	float UWidth;
+	float VHeight;
+	
 	GLuint vbo;
 	
 };

@@ -53,13 +53,6 @@ const GLchar* fragmentSource =
 
 
 
-
-
-
-
-
-
-
 int main()
 {
 	
@@ -70,7 +63,7 @@ int main()
 	}
 
 	GLFWwindow* window;
-	window = glfwCreateWindow(640, 480, "Butts bruh", NULL, NULL);
+	window = glfwCreateWindow(640, 480, "ENGINE", NULL, NULL);
 
 	if (!window)
 	{
@@ -158,13 +151,13 @@ int main()
 	glUseProgram(shaderProgram);
 	
 	//layout of vertex data
-	Shape triangle = Shape(1, 1, 1, 1);
+	Shape triangle = Shape(-0.5, -0.5, 1, 1, 0, 0, 0.5, 0.5);
 	triangle.syncVbo();
 	glBindBuffer(GL_ARRAY_BUFFER, triangle.vbo);
 
 	
 //---------------------------------------------------------------------------------
-	//LOAD TEXTURE
+	//LOAD TEXTURE/COL/POS
 	GLuint tex;
 	glGenTextures(1, &tex);
 
@@ -185,7 +178,7 @@ int main()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	//Retrieving Postion
+	//Specify vertex data
 	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
 	GLint texAttrib = glGetAttribLocation(shaderProgram, "texcoord");
 	GLint colAttrib = glGetAttribLocation(shaderProgram, "color");
@@ -210,12 +203,14 @@ int main()
 	{
 		{
 			// Clear the screen to black
-			glClearColor(0.2f, 0.4f, 0.1f, 1.0f);
+			glClearColor(0.8f, 0.0f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			// Draw a triangle from the 3 vertices
-			glBindBuffer(GL_ARRAY_BUFFER, triangle.vbo);
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			
+			
+			
+			
+			triangle.Draw();
 
 			//glDrawArrays(GL_TRIANGLES, 0, 3);
 
@@ -230,4 +225,3 @@ int main()
 	return 0;
 }
 
-// test commit, please ignore
