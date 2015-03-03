@@ -32,14 +32,15 @@ Shape::Shape()
 
 }
 
-void Shape::syncVbo() {
+void Shape::syncVbo() 
+{
 	float vertices[] =
 	{
-		//  Position                 Color           Texcoords
-		x, y,                  1.0f, 1.0f, 1.0f, U, V + VHeight,  // Top-left
-		x + width, y,          1.0f, 1.0f, 1.0f, U + UWidth, V + VHeight,  // Top-right
-		x + width, y + height, 1.0f, 1.0f, 1.0f, U + UWidth, V,  // Bottom-right
-		x, y + height,         1.0f, 1.0f, 1.0f, U, V,  // Bottom-left
+		//  Position                 Color               Texcoords
+		x, y,                  1.0f, 1.0f, 1.0f, 1.0f, U, V + VHeight,  // Top-left
+		x + width, y,          1.0f, 1.0f, 1.0f, 1.0f, U + UWidth, V + VHeight,  // Top-right
+		x + width, y + height, 1.0f, 1.0f, 1.0f, 1.0f, U + UWidth, V,  // Bottom-right
+		x, y + height,         1.0f, 1.0f, 1.0f, 1.0f, U, V,  // Bottom-left
 	
 
 	};

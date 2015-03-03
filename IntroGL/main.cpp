@@ -23,10 +23,10 @@ const GLchar* vertexSource =
 "#version 330\n"
 
 "in vec2 position;"
-"in vec3 color;"
+"in vec4 color;"
 "in vec2 texcoord;"
 
-"out vec3 Color;"
+"out vec4 Color;"
 "out vec2 Texcoord;"
 
 "uniform mat4 trans;"
@@ -40,13 +40,14 @@ const GLchar* vertexSource =
 
 const GLchar* fragmentSource =
 "#version 330\n"
-"in vec3 Color;"
+"in vec4 Color;"
 "in vec2 Texcoord;"
 "out vec4 outColor;"
 "uniform sampler2D tex;"
 "void main() "
 "{"
-"   outColor = texture(tex, Texcoord) * vec4(Color, 1.0);"
+"outColor = texture(tex, Texcoord) * Color;"
+//"   outColor = texture(texSonic, Texcoord) * vec4(Color, 1.0);"
 "}";
 
 
@@ -158,19 +159,28 @@ int main()
 	
 //---------------------------------------------------------------------------------
 	//LOAD TEXTURE/COL/POS
-	GLuint tex;
-	glGenTextures(1, &tex);
+	GLuint textures[2];
+	glGenTextures(2, textures);
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, tex);
+	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	int width, height;
-	unsigned char* image =
-		SOIL_load_image("Sonic.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("Sonic.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 0);
 
-
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//---------------
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, textures[1]);
+	image = SOIL_load_image("SANIC.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
+	glUniform1i(glGetUniformLocation(shaderProgram, "texBack"), 1);
 
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -189,9 +199,10 @@ int main()
 	glEnableVertexAttribArray(colAttrib);
 
 
-	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), 0);
-	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(5 * sizeof(float)));
-	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (void*)(2 * sizeof(float)));
+	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), 0);
+	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(2 * sizeof(float)));
+	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	
 
 
 
@@ -204,7 +215,8 @@ int main()
 			glClearColor(0.8f, 0.0f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			
 			
 			
