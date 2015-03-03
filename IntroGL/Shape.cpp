@@ -24,12 +24,8 @@ Shape::Shape()
 	UWidth = 0;
 	VHeight = 0;
 
-
-
-
 	glGenBuffers(1, &vbo); //Generates a buffer BRUH
-
-
+	
 }
 
 void Shape::syncVbo() 

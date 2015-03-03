@@ -14,7 +14,7 @@
 
 #include <ctime>
 #include <iostream>
-
+#include <tinyxml2.h>
 
 #include "Shape.h"
 
@@ -54,9 +54,51 @@ const GLchar* fragmentSource =
 
 
 
+struct AniSprite
+{
+	std::string Name;
+	float width, height;
+	float x0, x1, y0, y1;
+};
+
+AniSprite testSprite;
+
+void LoadSprites(const char* a_pAnimationSheet)
+{
+	tinyxml2::XMLDocument doc;
+	tinyxml2::XMLNode *rootNode, *currentNode;
+	tinyxml2::XMLElement *childElement, *child;
+	std::string str, aniName;
+	doc.LoadFile(a_pAnimationSheet); // load the document
+	rootNode = doc.FirstChildElement("atlas");// set the root node
+	currentNode = rootNode->FirstChildElement("sprite");
+	
+	
+
+	for (childElement = currentNode->ToElement();
+		childElement != NULL; childElement = childElement->NextSiblingElement())
+	{
+		aniName = childElement->Attribute("name");
+		int i = childElement->IntAttribute("x0");
+		int ii = childElement->IntAttribute("x1");
+
+		for (child = childElement->FirstChildElement();
+			child != NULL; child = child->NextSiblingElement())
+		{
+			str = child->Attribute("name");
+			int x0 = child->IntAttribute("x0");
+			//mAnimations[aniName].push_back(str);
+			i++;
+		}
+	}
+std:printf("Animation load done!\n");
+
+}
+
 int main()
 {
-	
+	LoadSprites("MegamanXSheet.xml");
+
 	//initilization of GLFW
 	if (!glfwInit())
 	{
@@ -165,7 +207,7 @@ int main()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	int width, height;
-	unsigned char* image = SOIL_load_image("Sonic.png", &width, &height, 0, SOIL_LOAD_RGBA);
+	unsigned char* image = SOIL_load_image("MegaManXSheet.png", &width, &height, 0, SOIL_LOAD_RGBA);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	SOIL_free_image_data(image);
 	glUniform1i(glGetUniformLocation(shaderProgram, "tex"), 0);

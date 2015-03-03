@@ -22,7 +22,7 @@ public:
 
 	void syncVbo();
 	void Draw();
-	//float vertices;
+	//float vertices; // holy fucking shit
 	float x;
 	float y;
 	float width;
@@ -33,7 +33,10 @@ public:
 	float VHeight;
 	
 	GLuint vbo;
-	
+	GLuint ebo;	// todo
+	GLuint vao;	// todo if time allows or justin mandates
+
+	GLuint shaderProgram;	// todo
 };
 
 #endif
