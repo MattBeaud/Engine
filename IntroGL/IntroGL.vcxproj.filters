@@ -30,6 +30,9 @@
     <ClCompile Include="Shaders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="VertexShader.glsl">
@@ -62,6 +65,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Shaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

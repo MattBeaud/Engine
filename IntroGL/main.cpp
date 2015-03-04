@@ -17,6 +17,7 @@
 #include <tinyxml2.h>
 
 #include "Shape.h"
+#include "Animator.h"
 
 const GLchar* vertexSource =
 
@@ -46,50 +47,14 @@ const GLchar* fragmentSource =
 //"   outColor = texture(texSonic, Texcoord) * vec4(Color, 1.0);"
 "}";
 
-struct AniSprite
-{
-	std::string Name;
-	float width, height;
-	float x0, x1, y0, y1;
-};
 
-AniSprite testSprite;
 
-void LoadSprites(const char* a_pAnimationSheet)
-{
-	tinyxml2::XMLDocument doc;
-	tinyxml2::XMLNode *rootNode, *currentNode;
-	tinyxml2::XMLElement *childElement, *child;
-	std::string str, aniName;
-	doc.LoadFile(a_pAnimationSheet); // load the document
-	rootNode = doc.FirstChildElement("atlas");// set the root node
-	currentNode = rootNode->FirstChildElement("sprite");
-	
-	
 
-	for (childElement = currentNode->ToElement();
-		childElement != NULL; childElement = childElement->NextSiblingElement())
-	{
-		aniName = childElement->Attribute("name");
-		int i = childElement->IntAttribute("x0");
-		int ii = childElement->IntAttribute("x1");
 
-		for (child = childElement->FirstChildElement();
-			child != NULL; child = child->NextSiblingElement())
-		{
-			str = child->Attribute("name");
-			int x0 = child->IntAttribute("x0");
-			//mAnimations[aniName].push_back(str);
-			i++;
-		}
-	}
-std:printf("Animation load done!\n");
-
-}
 
 int main()
 {
-	LoadSprites("MegamanXSheet.xml");
+	
 
 	//initilization of GLFW
 	if (!glfwInit())
@@ -177,10 +142,15 @@ int main()
 	glUseProgram(shaderProgram);
 	
 	//layout of vertex data
-	Shape triangle = Shape(-0.5, -0.5, 1, 1, 0, 0, 0.082, 0.3, shaderProgram, "MegamanxSheet.png");
+	Shape triangle = Shape(-0.5, -0.5, 0.5, 0.5, 0, 0, 0.09, 0.09, shaderProgram, "MegamanxSheet.png");
 	triangle.syncVbo();
 	triangle.syncEbo();
 	triangle.Texturing();
+
+	//Animator animator = Animator();
+	//animator.LoadSprite;
+
+	//animator.LoadSprite("MegamanXSheet.xml");
 
 	while (!glfwWindowShouldClose(window))
 	{

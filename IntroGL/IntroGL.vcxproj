@@ -70,6 +70,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="Shape.cpp" />
@@ -87,6 +88,7 @@
     <Image Include="Sonic.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="Shaders.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Sprite.h" />

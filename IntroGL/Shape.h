@@ -24,7 +24,7 @@ public:
 	void syncEbo();
 	void Draw();
 	void Texturing();
-	//float vertices; // holy fucking shit
+	//float vertices; //
 	float x;
 	float y;
 	float width;
