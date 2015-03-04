@@ -147,10 +147,11 @@ int main()
 	triangle.syncEbo();
 	triangle.Texturing();
 
-	//Animator animator = Animator();
-	//animator.LoadSprite;
-
-	//animator.LoadSprite("MegamanXSheet.xml");
+	Animator animator = Animator();
+	//animator.LoadSprite("a_pSpriteSheet");
+	animator.Initialize(&triangle, glm::vec2(1, 1));
+	animator.ImportSheet("MegamanXSheet.xml");
+	animator.SetAnimation("teleport", LOOP);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -161,16 +162,21 @@ int main()
 
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-						
+			
+			animator.PlayAnimation();
+
 			triangle.Draw();
 			
 			//glDrawArrays(GL_TRIANGLES, 0, 3);
 
 			//swap front and back buffers
 			glfwSwapBuffers(window);
+
+			
 		}
 		//poll for and process events
 		glfwPollEvents();
+		resetDeltaTime();
 	}
 
 	glfwTerminate();
