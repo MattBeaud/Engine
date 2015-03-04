@@ -165,6 +165,7 @@ int main()
 			
 			animator.PlayAnimation();
 
+			triangle.syncVbo();
 			triangle.Draw();
 			
 			//glDrawArrays(GL_TRIANGLES, 0, 3);
