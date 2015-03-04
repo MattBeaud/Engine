@@ -151,7 +151,7 @@ int main()
 	//animator.LoadSprite("a_pSpriteSheet");
 	animator.Initialize(&triangle, glm::vec2(1, 1));
 	animator.ImportSheet("MegamanXSheet.xml");
-	animator.SetAnimation("teleport", LOOP);
+	animator.SetAnimation("run", LOOP);
 
 	while (!glfwWindowShouldClose(window))
 	{
